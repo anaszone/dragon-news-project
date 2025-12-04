@@ -2,19 +2,14 @@ import React from "react";
 import { FaEye, FaShareAlt } from "react-icons/fa";
 import { IoMdBookmark, IoMdBookmarks } from "react-icons/io";
 import { MdBookmarkBorder } from "react-icons/md";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
-  const {
-    title,
-    author,
-    rating,
-    total_view,
-    thumbnail_url,
-    details,
-  } = news;
+  const { id, title, author, rating, total_view, thumbnail_url, details } = news;
 
   // Short Description (First 150 characters)
-  const shortDetails = details.length > 150 ? details.slice(0, 150) + "..." : details;
+  const shortDetails =
+    details.length > 150 ? details.slice(0, 150) + "..." : details;
 
   return (
     <div className="card bg-base-100 shadow-xl  rounded-xl">
@@ -56,7 +51,10 @@ const NewsCard = ({ news }) => {
       <div className="p-4">
         <p className="text-sm text-gray-600 leading-6">
           {shortDetails}
-          <span className="text-blue-500 font-semibold cursor-pointer"> Read More</span>
+          <Link to={`/news-details/${id}`} className="text-blue-500 font-semibold cursor-pointer">
+            {" "}
+            Read More
+          </Link>
         </p>
       </div>
 
@@ -65,7 +63,12 @@ const NewsCard = ({ news }) => {
         {/* Rating */}
         <div className="flex items-center gap-2 text-orange-500">
           <div className="rating rating-sm">
-            <input type="radio" className="mask mask-star-2 bg-orange-400" checked readOnly />
+            <input
+              type="radio"
+              className="mask mask-star-2 bg-orange-400"
+              checked
+              readOnly
+            />
           </div>
           <span className="text-gray-600">{rating.number}</span>
         </div>
